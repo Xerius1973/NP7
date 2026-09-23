@@ -38,3 +38,11 @@ Ajout de nombreuses valeurs nutritionnelles officielles Quick France issues de l
 
 ## V14 — correction définitive de reconnaissance
 Correction du problème de portée JavaScript qui empêchait le moteur V13 de voir `RESTAURANTS_JSON`. Le Big Mac dispose en plus d'une reconnaissance directe de secours afin que « Big Mac », « j'ai mangé un Big Mac », « McDo Big Mac » et formulations similaires utilisent bien la fiche McDonald's au lieu de la valeur par défaut.
+
+## V15 — design mobile et animations
+- Splash screen NP7 à l'ouverture.
+- Barre de navigation fixe en bas avec icônes.
+- Animation lors du changement d'onglet.
+- Effets de pression sur les boutons.
+- Animation de célébration avec confettis lorsque le texte d'objectif atteint est détecté.
+- Design mobile-first, cartes arrondies et effets de profondeur.

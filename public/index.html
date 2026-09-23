@@ -1,6 +1,75 @@
 <!doctype html><html lang="fr"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="theme-color" content="#0b63ce"><link rel="manifest" href="/manifest.webmanifest"><title>NP7</title><style>
 :root{--b:#0b63ce;--y:#ffc928;--ink:#10243a;--m:#6b7b8d;--bg:#f3f7fb;--line:#e2eaf2}*{box-sizing:border-box}body{margin:0;font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Arial;background:var(--bg);color:var(--ink)}button,input,select,textarea{font:inherit}button{border:0;cursor:pointer}.app{max-width:1050px;margin:auto;padding:12px 12px 80px}header{background:linear-gradient(135deg,#084a9b,var(--b));color:#fff;border-radius:22px;padding:20px;margin-bottom:12px}.brand{font-weight:900;font-size:30px;letter-spacing:2px}.tag{float:right;background:var(--y);color:#15243a;padding:6px 9px;border-radius:99px;font-size:11px;font-weight:800}h1{font-size:22px;margin:15px 0 5px}.sub{opacity:.85}.tabs{display:flex;gap:7px;overflow:auto;margin:10px 0}.tab{background:#fff;border:1px solid var(--line);padding:10px 12px;border-radius:11px;font-weight:800;white-space:nowrap}.tab.active{background:var(--b);color:#fff}.view{display:none}.view.active{display:block}.grid{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}.grid2{display:grid;grid-template-columns:repeat(2,1fr);gap:10px}.card{background:#fff;border:1px solid var(--line);border-radius:17px;padding:15px;margin-bottom:10px}.label{font-size:12px;color:var(--m);font-weight:700}.big{font-size:25px;font-weight:900;margin:5px 0}.small{font-size:12px;color:var(--m)}.progress{height:8px;background:#e8eef5;border-radius:99px;overflow:hidden}.progress i{display:block;height:100%;background:var(--b);width:0}.form{display:grid;grid-template-columns:repeat(4,1fr);gap:9px}.wide{grid-column:span 2}.field label{display:block;font-size:12px;color:var(--m);font-weight:700;margin-bottom:4px}.field input,.field select,.field textarea{width:100%;padding:10px;border:1px solid #d4e0eb;border-radius:10px;background:#fff}.field textarea{min-height:90px}.btn{padding:10px 13px;border-radius:10px;font-weight:800;margin-top:9px}.primary{background:var(--b);color:#fff}.yellow{background:var(--y);color:#15243a}.ghost{background:#edf3f8;color:var(--ink)}.danger{background:#ffe9e9;color:#a22}.row{display:flex;gap:8px;align-items:center;justify-content:space-between;flex-wrap:wrap}.cards{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}.macro{border:1px solid var(--line);border-radius:12px;padding:11px}.food{display:flex;justify-content:space-between;gap:8px;padding:10px 0;border-bottom:1px solid var(--line)}.food:last-child{border:0}.meta{font-size:12px;color:var(--m)}.icon{background:#eef3f7;border-radius:8px;padding:6px 8px}.bubble{padding:10px 12px;border-radius:12px;margin:6px 0;max-width:90%}.me{margin-left:auto;background:var(--b);color:#fff}.bot{background:#eaf2fb}.empty{text-align:center;color:var(--m);padding:20px}.toast{display:none;position:fixed;bottom:18px;left:50%;transform:translateX(-50%);background:var(--ink);color:#fff;padding:10px 14px;border-radius:11px;z-index:9}@media(max-width:750px){.grid{grid-template-columns:repeat(2,1fr)}.form{grid-template-columns:repeat(2,1fr)}.cards{grid-template-columns:1fr}}@media(max-width:500px){.grid,.grid2,.form{grid-template-columns:1fr}.wide{grid-column:auto}.tag{display:none}}
-</style></head><body><div class="app"><header><span class="tag">PERSONAL</span><div class="brand">NP7</div><h1>Calories, macros & sport</h1><div class="sub">Version autonome — aucun crédit OpenAI nécessaire</div></header><nav class="tabs"><button class="tab active" data-v="home">Accueil</button><button class="tab" data-v="meals">Repas</button><button class="tab" data-v="sport">Sport</button><button class="tab" data-v="weight">Poids</button><button class="tab" data-v="history">Historique</button><button class="tab" data-v="ai">IA locale</button></nav>
+</style>
+<style id="np7-v15-style">
+:root{
+  --np7-blue:#1677ff; --np7-blue2:#0b4fd8; --np7-yellow:#ffd43b;
+  --np7-bg:#f5f8fc; --np7-card:#fff; --np7-text:#10233f; --np7-muted:#718096;
+  --np7-shadow:0 10px 30px rgba(18,55,95,.10);
+}
+html,body{background:var(--np7-bg)!important;color:var(--np7-text);scroll-behavior:smooth}
+body{padding-bottom:92px!important}
+button,.btn,a,.tab,[role="button"]{transition:transform .18s ease,box-shadow .18s ease,opacity .18s ease,background .18s ease}
+button:active,.btn:active,.tab:active{transform:scale(.95)}
+.card,.panel,.box,.food,.meal,.stat,.hero,.section-card{border-radius:20px!important;box-shadow:var(--np7-shadow);border:1px solid rgba(22,119,255,.06)}
+/* Bottom navigation */
+#np7BottomNav{
+ position:fixed;left:12px;right:12px;bottom:12px;z-index:9999;
+ height:68px;background:rgba(255,255,255,.94);backdrop-filter:blur(18px);
+ -webkit-backdrop-filter:blur(18px);border:1px solid rgba(16,35,63,.08);
+ border-radius:24px;box-shadow:0 12px 35px rgba(10,40,80,.18);
+ display:flex;align-items:stretch;justify-content:space-around;padding:6px;
+}
+#np7BottomNav .np7-nav-item{
+ flex:1;border:0;background:transparent;color:#718096;border-radius:18px;
+ display:flex;flex-direction:column;align-items:center;justify-content:center;
+ gap:3px;font-size:10px;font-weight:700;cursor:pointer;position:relative;
+}
+#np7BottomNav .np7-nav-item .ico{font-size:22px;line-height:1}
+#np7BottomNav .np7-nav-item.active{color:var(--np7-blue);background:rgba(22,119,255,.09)}
+#np7BottomNav .np7-nav-item.active:after{
+ content:"";position:absolute;bottom:4px;width:5px;height:5px;border-radius:50%;background:var(--np7-yellow)
+}
+body.np7-ready #np7BottomNav{animation:np7NavIn .55s cubic-bezier(.2,.8,.2,1) both .25s}
+@keyframes np7NavIn{from{transform:translateY(110%);opacity:0}to{transform:translateY(0);opacity:1}}
+/* App opening */
+#np7Splash{
+ position:fixed;inset:0;z-index:10000;background:linear-gradient(145deg,#0b4fd8,#1677ff 62%,#ffd43b);
+ display:flex;align-items:center;justify-content:center;color:#fff;
+}
+#np7Splash .logo{font-size:62px;font-weight:950;letter-spacing:-4px;animation:np7Logo .8s cubic-bezier(.2,.8,.2,1) both}
+#np7Splash .sub{margin-top:8px;text-align:center;font-weight:700;opacity:.9;animation:np7Fade .5s both .35s}
+@keyframes np7Logo{from{transform:scale(.65) translateY(18px);opacity:0}to{transform:scale(1) translateY(0);opacity:1}}
+@keyframes np7Fade{from{opacity:0;transform:translateY(8px)}to{opacity:1;transform:none}}
+#np7Splash.hide{animation:np7SplashOut .45s ease forwards}
+@keyframes np7SplashOut{to{opacity:0;visibility:hidden;transform:scale(1.03)}}
+/* Tab/content transition */
+.np7-tab-anim{animation:np7Tab .34s cubic-bezier(.2,.8,.2,1)}
+@keyframes np7Tab{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:none}}
+/* Goal celebration */
+#np7GoalFx{position:fixed;inset:0;pointer-events:none;z-index:10001;display:none;overflow:hidden}
+#np7GoalFx.show{display:block}
+.np7-confetti{position:absolute;top:-20px;width:9px;height:14px;animation:np7Confetti 1.8s cubic-bezier(.1,.7,.2,1) forwards}
+@keyframes np7Confetti{to{transform:translate3d(var(--x),110vh,0) rotate(720deg);opacity:0}}
+#np7GoalMsg{
+ position:absolute;left:50%;top:38%;transform:translate(-50%,-50%) scale(.7);
+ background:#fff;padding:22px 28px;border-radius:28px;box-shadow:0 20px 60px rgba(0,0,0,.2);
+ text-align:center;opacity:0;animation:np7GoalPop .7s cubic-bezier(.2,1.4,.3,1) forwards;
+}
+@keyframes np7GoalPop{to{opacity:1;transform:translate(-50%,-50%) scale(1)}}
+.np7-burst{font-size:46px;display:block;animation:np7Pulse .8s ease infinite alternate}
+@keyframes np7Pulse{to{transform:scale(1.12) rotate(4deg)}}
+/* Inputs/cards micro interactions */
+input,select,textarea{transition:border-color .2s,box-shadow .2s,transform .2s}
+input:focus,select:focus,textarea:focus{border-color:var(--np7-blue)!important;box-shadow:0 0 0 4px rgba(22,119,255,.10)!important;outline:none}
+.np7-shake{animation:np7Shake .35s ease}
+@keyframes np7Shake{25%{transform:translateX(-5px)}50%{transform:translateX(5px)}75%{transform:translateX(-3px)}}
+@media(max-width:600px){
+  body{font-size:15px}
+  #np7BottomNav{left:8px;right:8px;bottom:8px}
+}
+</style>
+</head><body><div class="app"><header><span class="tag">PERSONAL</span><div class="brand">NP7</div><h1>Calories, macros & sport</h1><div class="sub">Version autonome — aucun crédit OpenAI nécessaire</div></header><nav class="tabs"><button class="tab active" data-v="home">Accueil</button><button class="tab" data-v="meals">Repas</button><button class="tab" data-v="sport">Sport</button><button class="tab" data-v="weight">Poids</button><button class="tab" data-v="history">Historique</button><button class="tab" data-v="ai">IA locale</button></nav>
 <section id="home" class="view active"><div class="grid"><div class="card"><div class="label">Calories</div><div class="big" id="k">0</div><div class="small" id="kl">0 restantes</div><div class="progress"><i id="kb"></i></div></div><div class="card"><div class="label">Protéines</div><div class="big" id="p">0 g</div><div class="small" id="pl">0 g restantes</div><div class="progress"><i id="pb"></i></div></div><div class="card"><div class="label">Glucides</div><div class="big" id="c">0 g</div><div class="small" id="cl">0 g restantes</div><div class="progress"><i id="cb"></i></div></div><div class="card"><div class="label">Lipides</div><div class="big" id="f">0 g</div><div class="small" id="fl">0 g restantes</div><div class="progress"><i id="fb"></i></div></div></div><div class="grid2"><div class="card"><h3>🎯 Objectif</h3><div class="cards"><div class="macro"><span class="label">Cible</span><br><b id="tk">2400</b> kcal</div><div class="macro"><span class="label">Sport</span><br><b id="sk">0</b> kcal</div><div class="macro"><span class="label">Net</span><br><b id="nk">0</b> kcal</div></div></div><div class="card"><h3>⚡ Rapide</h3><button class="btn primary" onclick="view('ai')">🤖 Décrire mon repas</button> <button class="btn yellow" onclick="view('sport')">🏋️ Séance</button></div></div><div class="card"><div class="row"><h3>🍽️ Aujourd’hui</h3><span id="count" class="small"></span></div><div id="homeFoods"></div></div></section>
 <section id="meals" class="view"><div class="card"><h3>🍽️ Ajout manuel</h3><div class="form"><div class="field wide"><label>Aliment</label><input id="fn" placeholder="poulet"></div><div class="field"><label>Quantité g</label><input id="fq" type="number" value="100"></div><div class="field"><label>Kcal/100g</label><input id="fk" type="number"></div><div class="field"><label>Prot/100g</label><input id="fp" type="number" step=".1"></div><div class="field"><label>Gluc/100g</label><input id="fc" type="number" step=".1"></div><div class="field"><label>Lip/100g</label><input id="ff" type="number" step=".1"></div></div><button class="btn primary" onclick="manual()">+ Ajouter</button></div><div class="card"><div class="row"><h3>Journée</h3><button class="btn danger" onclick="clearDay()">Réinitialiser</button></div><div id="foods"></div></div></section>
 <section id="sport" class="view"><div class="card"><h3>🏋️ Ajouter une séance</h3><div class="form"><div class="field wide"><label>Sport</label><select id="st"><option value="muscu">Musculation</option><option value="running">Course</option><option value="walking">Marche</option><option value="cycling">Vélo</option><option value="football">Football</option><option value="combat">JJB / combat</option></select></div><div class="field"><label>Durée min</label><input id="sm" type="number" value="60"></div><div class="field"><label>Intensité</label><select id="si"><option value=".85">Légère</option><option value="1" selected>Modérée</option><option value="1.15">Intense</option></select></div></div><p class="small">Estimation MET à partir du poids enregistré, pas une mesure de montre.</p><button class="btn primary" onclick="workout()">Ajouter</button></div><div class="card"><h3>Historique sport</h3><div id="works"></div></div></section>
@@ -321,4 +390,80 @@ function genericRestaurantEstimate(text){
 })();
 </script>
 
+
+<div id="np7Splash"><div><div class="logo">NP7</div><div class="sub">Nutrition • Sport • Progression</div></div></div>
+<div id="np7GoalFx"></div>
+<nav id="np7BottomNav" aria-label="Navigation principale"></nav>
+<script id="np7-v15-script">
+(function(){
+  const icons={
+    "accueil":"⌂","home":"⌂","repas":"🍽️","meal":"🍽️","macros":"◉","macro":"◉",
+    "poids":"⚖️","weight":"⚖️","historique":"↺","history":"↺","ia":"✨","ai":"✨",
+    "sport":"🏋️","seances":"🏋️","profil":"👤","parametres":"⚙️"
+  };
+  function clean(s){return String(s||"").toLowerCase().normalize("NFD").replace(/[\u0300-\u036f]/g,"").trim();}
+  function findTabs(){
+    const candidates=[...document.querySelectorAll("button,.tab,[role=tab],a")];
+    return candidates.filter(el=>{
+      const t=clean(el.innerText||el.textContent);
+      return t && Object.keys(icons).some(k=>t.includes(k));
+    }).filter((el,i,a)=>a.indexOf(el)===i);
+  }
+  function activateVisual(label){
+    document.querySelectorAll("#np7BottomNav .np7-nav-item").forEach(b=>b.classList.toggle("active",clean(b.dataset.label)===clean(label)));
+    const main=document.querySelector("main")||document.querySelector(".app")||document.body;
+    main.classList.remove("np7-tab-anim"); void main.offsetWidth; main.classList.add("np7-tab-anim");
+  }
+  function buildNav(){
+    const nav=document.getElementById("np7BottomNav"); if(!nav)return;
+    const tabs=findTabs();
+    const used=[];
+    tabs.forEach(el=>{
+      const label=(el.innerText||el.textContent||"").trim().split(/\n/)[0].trim();
+      const key=Object.keys(icons).find(k=>clean(label).includes(k));
+      if(!key || used.includes(key))return;
+      used.push(key);
+      const b=document.createElement("button");
+      b.className="np7-nav-item"; b.dataset.label=label; b.type="button";
+      b.innerHTML='<span class="ico">'+icons[key]+'</span><span>'+label+'</span>';
+      b.addEventListener("click",()=>{
+        el.click();
+        setTimeout(()=>activateVisual(label),30);
+      });
+      nav.appendChild(b);
+      el.style.display="none";
+    });
+    if(!nav.children.length){
+      nav.style.display="none";
+      document.body.style.paddingBottom="20px";
+    }
+  }
+  function splash(){
+    setTimeout(()=>document.getElementById("np7Splash")?.classList.add("hide"),900);
+    setTimeout(()=>document.body.classList.add("np7-ready"),1050);
+  }
+  window.np7CelebrateGoal=function(){
+    const fx=document.getElementById("np7GoalFx"); if(!fx)return;
+    fx.innerHTML='<div id="np7GoalMsg"><span class="np7-burst">🏆</span><b style="font-size:24px">Objectif atteint !</b><div style="margin-top:6px;color:#718096">Bravo, continue comme ça 💪</div></div>';
+    for(let i=0;i<70;i++){
+      const s=document.createElement("span"); s.className="np7-confetti";
+      s.style.left=(Math.random()*100)+"%"; s.style.setProperty("--x",(Math.random()*240-120)+"px");
+      s.style.animationDelay=(Math.random()*.35)+"s";
+      s.style.transform="rotate("+Math.random()*360+"deg)";
+      fx.appendChild(s);
+    }
+    fx.classList.add("show");
+    setTimeout(()=>fx.classList.remove("show"),2300);
+  };
+  // Observe common progress/goal text and trigger once per crossing.
+  let celebrated=false;
+  const obs=new MutationObserver(()=>{
+    const txt=(document.body.innerText||"").toLowerCase();
+    const hit=/objectif atteint|objectif.*100\\s*%|100\\s*%.*objectif/.test(txt);
+    if(hit&&!celebrated){celebrated=true;window.np7CelebrateGoal();setTimeout(()=>celebrated=false,5000);}
+  });
+  obs.observe(document.body,{subtree:true,childList:true,characterData:true});
+  window.addEventListener("load",()=>{buildNav();splash();});
+})();
+</script>
 </body></html>
