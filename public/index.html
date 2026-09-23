@@ -6,6 +6,33 @@
 <section id="sport" class="view"><div class="card"><h3>🏋️ Ajouter une séance</h3><div class="form"><div class="field wide"><label>Sport</label><select id="st"><option value="muscu">Musculation</option><option value="running">Course</option><option value="walking">Marche</option><option value="cycling">Vélo</option><option value="football">Football</option><option value="combat">JJB / combat</option></select></div><div class="field"><label>Durée min</label><input id="sm" type="number" value="60"></div><div class="field"><label>Intensité</label><select id="si"><option value=".85">Légère</option><option value="1" selected>Modérée</option><option value="1.15">Intense</option></select></div></div><p class="small">Estimation MET à partir du poids enregistré, pas une mesure de montre.</p><button class="btn primary" onclick="workout()">Ajouter</button></div><div class="card"><h3>Historique sport</h3><div id="works"></div></div></section>
 <section id="weight" class="view"><div class="card"><h3>⚖️ Profil</h3><div class="form"><div class="field"><label>Poids kg</label><input id="w" type="number" step=".1"></div><div class="field"><label>Taille cm</label><input id="h" type="number"></div><div class="field"><label>Âge</label><input id="a" type="number"></div><div class="field"><label>Sexe</label><select id="sex"><option value="male">Homme</option><option value="female">Femme</option></select></div><div class="field wide"><label>Activité</label><select id="act"><option value="1.35">1–2 / semaine</option><option value="1.55" selected>3–4 / semaine</option><option value="1.725">5–6 / semaine</option><option value="1.9">Très actif</option></select></div><div class="field wide"><label>Objectif</label><select id="goal"><option value="cut">Sécher / recomposition</option><option value="maintain">Maintenir</option><option value="bulk">Prise de masse</option></select></div></div><button class="btn yellow" onclick="targets()">🎯 Recalculer</button></div><div class="card"><h3>Ajouter une pesée</h3><input id="we" type="number" step=".1" placeholder="75"><button class="btn primary" onclick="addWeight()">Ajouter</button><div id="wh"></div></div></section>
 <section id="history" class="view"><div class="card"><h3>📊 Historique</h3><div id="hist"></div></div></section>
+<section id="restaurants" class="view">
+<div class="card"><h2>🍔 Restaurants de France</h2><p class="small">Recherche un restaurant en France via OpenStreetMap. Les petits établissements peuvent être trouvés s’ils sont référencés. Les données peuvent être incomplètes.</p><div class="form"><div class="field wide"><label>Restaurant / ville</label><input id="restQuery" placeholder="ex : GOMU Amiens, O'Tacos Lille..."></div><div class="field wide"><label>Ce que tu as mangé</label><input id="restFood" placeholder="ex : burger + frites, tacos 3 viandes, pizza 4 fromages"></div></div><div class="row wrap" style="margin-top:10px"><button class="btn primary" onclick="searchRestaurants()">🔎 Rechercher</button><button class="btn ghost" onclick="useRestaurantFood()">➕ Ajouter le repas estimé</button></div><div id="restaurantResults" style="margin-top:12px"></div><div id="restaurantEstimate" style="margin-top:12px"></div></div><div class="section card"><h2>ℹ️ Estimation</h2><p class="small">Pour les restaurants indépendants, NP7 estime les plats selon leur type et une portion standard. Ce n’est pas une valeur nutritionnelle officielle.</p></div></section>
+
+<section id="database" class="view">
+  <div class="card">
+    <h2>🥗 Grande base nutritionnelle</h2>
+    <p class="small">Recherche des produits alimentaires par nom ou marque. NP7 peut utiliser une base locale enrichie et Open Food Facts pour les produits référencés.</p>
+    <div class="form">
+      <div class="field wide"><label>Aliment / produit / marque</label><input id="dbQuery" placeholder="ex : fromage blanc, Nutella, Coca-Cola, céréales..."></div>
+      <div class="field"><label>Quantité (g)</label><input id="dbQty" type="number" value="100"></div>
+    </div>
+    <div class="row wrap" style="margin-top:10px">
+      <button class="btn primary" onclick="searchNutrition()">🔎 Rechercher</button>
+      <button class="btn yellow" onclick="goAIWithNutrition()">🤖 Décrire mon repas</button>
+    </div>
+    <div id="dbResults" style="margin-top:12px"></div>
+  </div>
+  <div class="section card">
+    <h2>📚 Base de référence</h2>
+    <div class="cards">
+      <div class="macro"><b>3 484</b><br><span class="small">aliments Ciqual 2025</span></div>
+      <div class="macro"><b>74</b><br><span class="small">constituants nutritionnels</span></div>
+      <div class="macro"><b>∞</b><br><span class="small">produits recherchables via Open Food Facts</span></div>
+    </div>
+    <p class="small" style="margin-top:10px">Ciqual donne des valeurs moyennes françaises. Open Food Facts est collaboratif : certaines fiches peuvent être incomplètes ou estimées.</p>
+  </div>
+</section>
 <section id="ai" class="view"><div class="card"><h3>🤖 IA locale NP7</h3><p class="small">Ce n’est pas ChatGPT : le calcul est fait directement dans le téléphone à partir d’une base d’aliments et de règles de quantité. Aucun crédit API n’est utilisé.</p><div id="chat"><div class="bubble bot">Exemple : « J’ai mangé 200 g de poulet, 150 g de riz et 2 œufs. »</div></div><textarea id="aii" placeholder="Décris ton repas..."></textarea><br><button class="btn primary" onclick="analyze()">Analyser et ajouter</button><div class="row" style="margin-top:12px"><b>Aliments personnalisés</b></div><div class="form"><div class="field wide"><label>Nom</label><input id="cn"></div><div class="field"><label>Kcal</label><input id="ck" type="number"></div><div class="field"><label>Prot</label><input id="cp" type="number"></div><div class="field"><label>Gluc</label><input id="cc" type="number"></div><div class="field"><label>Lip</label><input id="cf" type="number"></div></div><button class="btn yellow" onclick="customFood()">Enregistrer</button></div></section></main></div><div id="toast" class="toast"></div>
 <script>
 const DB={riz:['Riz cuit',130,2.7,28.2,.3],poulet:['Poulet cuit',165,31,0,3.6],'blanc de poulet':['Poulet cuit',165,31,0,3.6],dinde:['Blanc de dinde',110,24,1.5,1],'jambon de dinde':['Jambon de dinde',110,20,2,2],oeuf:['Œuf',143,12.6,.7,9.5],'œuf':['Œuf',143,12.6,.7,9.5],pain:['Pain',265,9,49,3.2],'pain au chocolat':['Pain au chocolat',420,7.5,45,23],lait:['Lait demi-écrémé',46,3.2,4.8,1.5],fromage:['Fromage',350,25,2,27],banane:['Banane',89,1.1,20.2,.3],pomme:['Pomme',52,.3,13.8,.2],avoine:['Flocons d’avoine',389,16.9,66.3,6.9],whey:['Whey',400,80,8,6],pates:['Pâtes cuites',158,5.8,30.9,.9],pâtes:['Pâtes cuites',158,5.8,30.9,.9],saumon:['Saumon',208,20.5,0,13.4],steak:['Steak haché',250,26,0,17],yaourt:['Yaourt nature',61,4.5,4.7,3.3],huile:['Huile',884,0,0,100]};
@@ -19,5 +46,258 @@ function customFood(){let name=cn.value.trim();if(!name)return;S.custom[norm(nam
 function workout(){let min=n('sm');if(min<=0)return;let met=(MET[st.value]||5)*n('si'),k=met*3.5*S.p.w/200*min;S.wo.unshift({date:today(),type:st.value,min,k:Math.round(k)});save();toast('Séance ajoutée')}
 function renderWorks(){works.innerHTML=S.wo.length?S.wo.slice(0,20).map((x,i)=>`<div class="food"><div><b>${({muscu:'Musculation',running:'Course',walking:'Marche',cycling:'Vélo',football:'Football',combat:'JJB / combat'})[x.type]}</b><div class="meta">${x.date} • ${x.min} min • ${x.k} kcal estimées</div></div><button class="icon" onclick="S.wo.splice(${i},1);save()">✕</button></div>`).join(''):'<div class="empty">Aucune séance.</div>'}
 function targets(){let p=S.p;p.w=n('w');p.h=n('h');p.a=n('a');p.sex=sex.value;p.act=n('act');p.goal=goal.value;let b=p.sex==='male'?10*p.w+6.25*p.h-5*p.a+5:10*p.w+6.25*p.h-5*p.a-161,t=b*p.act;p.k=Math.round(p.goal==='cut'?t-300:p.goal==='bulk'?t+250:t);p.pr=Math.round(p.w*2);p.f=Math.round(p.w*.9);p.ca=Math.round(Math.max(0,(p.k-p.pr*4-p.f*9)/4));save();toast('Objectifs recalculés')}
-function addWeight(){let x=n('we');if(x<=0)return;S.wh.unshift({date:today(),w:x});S.p.w=x;save();toast('Poids enregistré')}function renderWeights(){wh.innerHTML=S.wh.length?S.wh.slice(0,15).map(x=>`<div class="food"><div><b>${x.w} kg</b><div class="meta">${x.date}</div></div></div>`).join(''):'<div class="empty">Aucune pesée.</div>'}function renderHist(){let ds=[...new Set([...Object.keys(S.d),...S.wo.map(x=>x.date),...S.wh.map(x=>x.date)])].sort().reverse().slice(0,14);hist.innerHTML=ds.length?ds.map(d=>{let k=(S.d[d]||[]).reduce((a,x)=>a+x.k,0),s=S.wo.filter(x=>x.date===d).reduce((a,x)=>a+x.k,0),w=S.wh.find(x=>x.date===d);return `<div class="food"><div><b>${d}</b><div class="meta">${Math.round(k)} kcal mangées • ${Math.round(s)} kcal sport${w?' • '+w.w+' kg':''}</div></div></div>`}).join(''):'<div class="empty">Ton historique apparaîtra ici.</div>'}function toast(s){let e=document.getElementById('toast');e.textContent=s;e.style.display='block';setTimeout(()=>e.style.display='none',1800)}render();
-</script></body></html>
+function addWeight(){let x=n('we');if(x<=0)return;S.wh.unshift({date:today(),w:x});S.p.w=x;save();toast('Poids enregistré')}function renderWeights(){wh.innerHTML=S.wh.length?S.wh.slice(0,15).map(x=>`<div class="food"><div><b>${x.w} kg</b><div class="meta">${x.date}</div></div></div>`).join(''):'<div class="empty">Aucune pesée.</div>'}function renderHist(){let ds=[...new Set([...Object.keys(S.d),...S.wo.map(x=>x.date),...S.wh.map(x=>x.date)])].sort().reverse().slice(0,14);hist.innerHTML=ds.length?ds.map(d=>{let k=(S.d[d]||[]).reduce((a,x)=>a+x.k,0),s=S.wo.filter(x=>x.date===d).reduce((a,x)=>a+x.k,0),w=S.wh.find(x=>x.date===d);return `<div class="food"><div><b>${d}</b><div class="meta">${Math.round(k)} kcal mangées • ${Math.round(s)} kcal sport${w?' • '+w.w+' kg':''}</div></div></div>`}).join(''):'<div class="empty">Ton historique apparaîtra ici.</div>'}function toast(s){let e=document.getElementById('toast');e.textContent=s;e.style.display='block';setTimeout(()=>e.style.display='none',1800)}
+let selectedRestaurant=null, selectedRestaurantFood=null;
+async function searchRestaurants(){
+ const q=document.getElementById('restQuery').value.trim(), box=document.getElementById('restaurantResults');
+ if(!q){toast('Indique un restaurant ou une ville.');return}
+ box.innerHTML='<div class="empty">Recherche en cours…</div>';
+ try{
+  const u='https://nominatim.openstreetmap.org/search?format=jsonv2&countrycodes=fr&limit=8&q='+encodeURIComponent(q);
+  const r=await fetch(u,{headers:{'Accept-Language':'fr'}}); if(!r.ok) throw Error(); const data=await r.json();
+  const places=data.filter(x=>/restaurant|fast_food|cafe|food_court|bar|pub|ice_cream/i.test((x.type||'')+' '+(x.class||'')+' '+(x.display_name||'')));
+  if(!places.length){box.innerHTML='<div class="empty">Aucun restaurant trouvé. Essaie avec le nom + la ville.</div>';return}
+  window._restaurantResults=places;
+  box.innerHTML=places.map((x,i)=>`<div class="food"><div><b>${esc(x.name||x.display_name.split(',')[0])}</b><div class="meta">${esc(x.display_name)}</div></div><button class="btn ghost" onclick="selectRestaurant(${i})">Choisir</button></div>`).join('');
+ }catch(e){box.innerHTML='<div class="empty">La recherche est momentanément indisponible. Tu peux quand même utiliser l’IA locale.</div>'}
+}
+function selectRestaurant(i){selectedRestaurant=window._restaurantResults?.[i]||null;if(selectedRestaurant){document.getElementById('restQuery').value=selectedRestaurant.name||selectedRestaurant.display_name.split(',')[0];toast('Restaurant sélectionné.');estimateRestaurantMeal()}}
+function estimateRestaurantMeal(){
+ const text=normalize(document.getElementById('restFood').value), rules=[[/tacos/,{name:'Tacos garni',kcal:850,prot:35,carbs:80,fat:42}],[/kebab|doner/,{name:'Kebab',kcal:700,prot:30,carbs:75,fat:30}],[/burger|hamburger/,{name:'Burger',kcal:650,prot:30,carbs:55,fat:32}],[/pizza/,{name:'Pizza',kcal:900,prot:35,carbs:100,fat:38}],[/frites?|fries/,{name:'Frites',kcal:330,prot:4,carbs:43,fat:15}],[/nugget/,{name:'Nuggets (6)',kcal:270,prot:15,carbs:16,fat:16}],[/wrap|sandwich/,{name:'Wrap / sandwich',kcal:550,prot:25,carbs:55,fat:25}],[/salade/,{name:'Salade composée',kcal:450,prot:20,carbs:30,fat:25}]];
+ if(!text)return; let total={kcal:0,prot:0,carbs:0,fat:0},labels=[]; for(const [rx,v] of rules)if(rx.test(text)){Object.keys(total).forEach(k=>total[k]+=v[k]);labels.push(v.name)}
+ if(!labels.length){document.getElementById('restaurantEstimate').innerHTML='<div class="empty">Plat non reconnu. Essaie « burger + frites », « tacos 3 viandes » ou « pizza ».</div>';selectedRestaurantFood=null;return}
+ const rn=selectedRestaurant?.name||document.getElementById('restQuery').value||'Restaurant'; selectedRestaurantFood={name:`${rn} — ${labels.join(' + ')}`,q:1,...total};
+ document.getElementById('restaurantEstimate').innerHTML=`<div class="card" style="background:#f8fbff"><b>Estimation</b><div class="small">${esc(rn)} — ${esc(labels.join(' + '))}</div><div class="big">${Math.round(total.kcal)} kcal</div><div class="small">P ${fmt(total.prot)} g • G ${fmt(total.carbs)} g • L ${fmt(total.fat)} g</div><div class="small">⚠️ Portion standard estimée.</div></div>`;
+}
+function useRestaurantFood(){if(!selectedRestaurantFood)estimateRestaurantMeal();if(!selectedRestaurantFood){toast('Décris ce que tu as mangé.');return}day().push(selectedRestaurantFood);save();toast('Repas restaurant ajouté.');document.getElementById('restFood').value='';selectedRestaurantFood=null}
+document.getElementById('restFood')?.addEventListener('input',estimateRestaurantMeal);
+
+
+function productNutrition(p){
+  const n=p.nutriments||{};
+  return {
+    kcal:Number(n["energy-kcal_100g"] ?? n["energy-kcal"] ?? 0)||0,
+    prot:Number(n.proteins_100g||0)||0,
+    carbs:Number(n.carbohydrates_100g||0)||0,
+    fat:Number(n.fat_100g||0)||0
+  };
+}
+function addLocalNutrition(k){
+  const v=DB[k], q=+document.getElementById("dbQty").value||100;
+  day().push({name:v.name,q,kcal:v.kcal*q/100,prot:v.prot*q/100,carbs:v.carbs*q/100,fat:v.fat*q/100});
+  save();toast("Aliment ajouté.");
+}
+function addOFFProduct(i){
+  const p=window._nutritionProducts?.[i];if(!p)return;
+  const n=productNutrition(p),q=+document.getElementById("dbQty").value||100;
+  day().push({name:(p.brands?p.brands+" — ":"")+p.product_name,q,kcal:n.kcal*q/100,prot:n.prot*q/100,carbs:n.carbs*q/100,fat:n.fat*q/100});
+  save();toast("Produit ajouté.");
+}
+function goAIWithNutrition(){showView("ai");document.getElementById("aiInput").focus()}
+
+render();
+</script>
+<script>
+let CIQUAL=[];
+async function loadCiqual(){
+  try{
+    const r=await fetch("/data/ciqual2025.json",{cache:"force-cache"});
+    if(!r.ok)throw new Error();
+    CIQUAL=await r.json();
+    window.CIQUAL=CIQUAL;
+  }catch(e){ console.warn("Ciqual indisponible",e); }
+}
+function searchCiqual(q){
+  const s=normalize(q);
+  if(!s||!CIQUAL.length)return [];
+  const terms=s.split(/\s+/).filter(Boolean);
+  return CIQUAL.map(x=>{
+    const t=normalize(x.n);
+    let score=0;
+    if(t===s)score+=100;
+    if(t.includes(s))score+=50;
+    for(const term of terms)if(t.includes(term))score+=10;
+    return [score,x];
+  }).filter(x=>x[0]>0).sort((a,b)=>b[0]-a[0]).slice(0,30).map(x=>x[1]);
+}
+function addCiqual(code){
+  const x=CIQUAL.find(z=>z.c===String(code)); if(!x)return;
+  const q=Math.max(1,+document.getElementById("dbQty").value||100);
+  day().push({name:x.n,q,kcal:(x.k||0)*q/100,prot:(x.p||0)*q/100,carbs:(x.gld||0)*q/100,fat:(x.l||0)*q/100});
+  save();toast("Aliment Ciqual ajouté.");
+}
+async function searchNutrition(){
+  const q=document.getElementById("dbQuery").value.trim(), box=document.getElementById("dbResults");
+  if(!q){toast("Indique un aliment.");return}
+  if(!CIQUAL.length) await loadCiqual();
+  const hits=searchCiqual(q);
+  let local=Object.entries(DB).filter(([k,v])=>normalize(k).includes(normalize(q))||normalize(v.name).includes(normalize(q))).slice(0,10);
+  let out="";
+  if(hits.length){
+    out+='<h3 style="margin:10px 0">Ciqual 2025</h3>'+hits.map(x=>`<div class="food"><div><b>${esc(x.n)}</b><div class="meta">${x.k??0} kcal / 100 g • P ${fmt(x.p||0)} g • G ${fmt(x.gld||0)} g • L ${fmt(x.l||0)} g</div></div><button class="btn ghost" onclick="addCiqual('${escAttr(x.c)}')">Ajouter</button></div>`).join("");
+  }
+  if(local.length){
+    out+='<h3 style="margin:16px 0 10px">Aliments intégrés</h3>'+local.map(([k,v])=>`<div class="food"><div><b>${esc(v.name)}</b><div class="meta">${v.kcal} kcal / 100 g • P ${v.prot} g • G ${v.carbs} g • L ${v.fat} g</div></div><button class="btn ghost" onclick="addLocalNutrition('${escAttr(k)}')">Ajouter</button></div>`).join("");
+  }
+  box.innerHTML=out||'<div class="empty">Aucun aliment trouvé.</div>';
+}
+loadCiqual();
+</script>
+
+
+<script>
+let RESTAURANTS_JSON=[];
+async function loadRestaurantDB(){
+  try{
+    const r=await fetch("/data/restaurants_france.json",{cache:"force-cache"});
+    if(!r.ok) throw new Error();
+    const d=await r.json();
+    RESTAURANTS_JSON=d.restaurants||[];
+  }catch(e){console.warn("Base restaurants indisponible",e);}
+}
+function restaurantDBMatches(text){
+  const s=normalize(text), found=[];
+  for(const r of RESTAURANTS_JSON){
+    const rnames=[r.restaurant,...(r.aliases||[])].map(normalize);
+    for(const p of (r.products||[])){
+      const pnames=[p.name,...(p.aliases||[])].map(normalize);
+      const productHit=pnames.some(a=>a && s.includes(a));
+      const restaurantHit=rnames.some(a=>a && s.includes(a));
+      if(productHit){
+        let count=1;
+        const keys=pnames.filter(Boolean).sort((a,b)=>b.length-a.length);
+        for(const key of keys){
+          const m=s.match(new RegExp("(\\d+)\\s*(?:x\\s*)?"+key.replace(/[.*+?^${}()|[\]\\]/g,"\\$&")+"\\b"));
+          if(m){count=Math.max(1,+m[1]);break}
+        }
+        found.push({restaurant:r,product:p,count,explicitRestaurant:restaurantHit});
+        break;
+      }
+    }
+  }
+  return found;
+}
+</script>
+
+<script>loadRestaurantDB();</script>
+
+function genericRestaurantEstimate(text){
+  const s=normalize(text);
+  let k=0,p=0,c=0,f=0,label="";
+  if(s.includes("pizza")){k=850;p=32;c=105;f=30;label="Pizza (estimation)";}
+  else if(s.includes("burger")){k=650;p=30;c=45;f=32;label="Burger (estimation)";}
+  else if(s.includes("kebab")||s.includes("doner")){k=700;p=30;c=75;f=30;label="Kebab (estimation)";}
+  else if(s.includes("tacos")){k=800;p=38;c=70;f=38;label="Tacos (estimation)";}
+  else if(s.includes("poke")){k=650;p=30;c=75;f=22;label="Poke bowl (estimation)";}
+  else if(s.includes("sushi")){k=400;p=20;c=55;f=10;label="Sushi (estimation)";}
+  else if(s.includes("sandwich")){k=450;p=22;c=45;f=18;label="Sandwich (estimation)";}
+  else if(s.includes("frites")){k=400;p=5;c=55;f=18;label="Frites (estimation)";}
+  else return null;
+  return {name:label,q:1,k,pr:p,ca:c,f};
+}
+
+
+<script>
+(function(){
+  const oldNormalize = window.normalize;
+  window.normalizeRestaurantText = function(v){
+    return String(v||"")
+      .toLowerCase()
+      .normalize("NFD").replace(/[\u0300-\u036f]/g,"")
+      .replace(/['’`´]/g,"")
+      .replace(/[^a-z0-9]+/g," ")
+      .replace(/\s+/g," ").trim();
+  };
+
+  const ENS_ALIASES={
+    "mcdonalds":["mcdonalds","mcdo","macdo","mcd","mc donalds"],
+    "burger king":["burger king","burgerking","bk"],
+    "kfc":["kfc"],
+    "quick":["quick"],
+    "subway":["subway"],
+    "otacos":["otacos","o tacos","o tacos"],
+    "dominos pizza":["dominos","dominos pizza","domino pizza"],
+    "pizza hut":["pizza hut","pizzahut"],
+    "five guys":["five guys","fiveguys"],
+    "buffalo grill":["buffalo grill","buffalo"],
+    "starbucks":["starbucks"],
+    "pokawa":["pokawa"],
+    "big fernand":["big fernand"],
+    "chamas tacos":["chamas tacos","chamas"],
+    "tacos avenue":["tacos avenue"],
+    "nabab kebab":["nabab","nabab kebab"]
+  };
+
+  function aliasesForRestaurant(r){
+    const key=window.normalizeRestaurantText(r.restaurant);
+    return [key,...(r.aliases||[]).map(window.normalizeRestaurantText),...(ENS_ALIASES[key]||[])].filter(Boolean);
+  }
+  function tokenIncludes(text, phrase){
+    const t=" "+text+" ", p=" "+phrase+" ";
+    return t.includes(p);
+  }
+  function quantityFor(text, names){
+    for(const n of names.sort((a,b)=>b.length-a.length)){
+      const esc=n.replace(/[.*+?^${}()|[\]\\]/g,"\\$&");
+      const m=text.match(new RegExp("(\\d+)\\s*(?:x\\s*)?"+esc+"\\b"));
+      if(m) return Math.max(1,Number(m[1]));
+    }
+    return 1;
+  }
+
+  window.restaurantDBMatchesV13=function(text){
+    const s=window.normalizeRestaurantText(text), results=[];
+    if(!s || !Array.isArray(window.RESTAURANTS_JSON)) return results;
+
+    for(const r of window.RESTAURANTS_JSON){
+      const ra=aliasesForRestaurant(r);
+      const restaurantHit=ra.some(a=>tokenIncludes(s,a));
+      for(const p of (r.products||[])){
+        const pa=[p.name,...(p.aliases||[])].map(window.normalizeRestaurantText).filter(Boolean);
+        const productHit=pa.some(a=>tokenIncludes(s,a));
+        if(productHit){
+          const q=quantityFor(s,pa);
+          results.push({restaurant:r,product:p,count:q,explicitRestaurant:restaurantHit});
+        }
+      }
+    }
+    // Prefer a result whose restaurant was explicitly mentioned.
+    return results.sort((a,b)=>Number(b.explicitRestaurant)-Number(a.explicitRestaurant));
+  };
+
+  // Make common natural-language phrases unambiguous.
+  const originalAnalyze=window.analyze;
+  window.analyze=async function(){
+    const input=document.getElementById("aii");
+    const text=input ? input.value.trim() : "";
+    const matches=window.restaurantDBMatchesV13(text);
+    if(matches.length){
+      const T={k:0,pr:0,ca:0,f:0};
+      matches.forEach(x=>{
+        const p=x.product,q=x.count||1;
+        const z={name:x.restaurant.restaurant+" — "+p.name,q:p.portion,k:(Number(p.kcal)||0)*q,pr:(Number(p.protein)||0)*q,ca:(Number(p.carbs)||0)*q,f:(Number(p.fat)||0)*q,source:p.source||"estimation"};
+        if(typeof foods==="function") foods().push(z);
+        T.k+=z.k;T.pr+=z.pr;T.ca+=z.ca;T.f+=z.f;
+      });
+      if(typeof save==="function") save();
+      const chat=document.getElementById("chat");
+      if(chat) chat.insertAdjacentHTML("beforeend",
+        `<div class="bubble bot">🍔 <b>${matches.map(x=>x.restaurant.restaurant+" — "+x.product.name).join(", ")}</b> reconnu.<br>✅ Ajouté : <b>${Math.round(T.k)} kcal</b><br>Protéines ${T.pr.toFixed(1)} g • Glucides ${T.ca.toFixed(1)} g • Lipides ${T.f.toFixed(1)} g</div>`);
+      if(input) input.value="";
+      return;
+    }
+    if(typeof originalAnalyze==="function") return originalAnalyze();
+  };
+
+  // Explicit test helper available from the browser console.
+  window.testNP7Restaurant=function(s){
+    return window.restaurantDBMatchesV13(s).map(x=>({
+      restaurant:x.restaurant.restaurant, product:x.product.name,
+      kcal:x.product.kcal, protein:x.product.protein,
+      carbs:x.product.carbs, fat:x.product.fat, count:x.count
+    }));
+  };
+})();
+</script>
+
+</body></html>
