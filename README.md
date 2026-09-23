@@ -1,23 +1,9 @@
-# NP7 — version personnelle avec IA OpenAI
+# NP7 V4 — sans dépendance OpenAI
 
-Cette version contient l'interface NP7 V2 et un serveur Node/Express qui appelle l'API OpenAI.
+Cette version supprime la dépendance obligatoire à l'API OpenAI. Aucun `OPENAI_API_KEY` n'est nécessaire.
 
-## Lancer sur ton Mac
+Fonctions : accueil, calories/macros restantes, repas, sport avec estimation MET, poids, historique, IA locale, aliments personnalisés, stockage local.
 
-1. Installe Node.js 20 ou plus récent.
-2. Ouvre Terminal dans ce dossier.
-3. Lance `npm install`.
-4. Copie `.env.example` en `.env`.
-5. Mets ta clé API OpenAI dans `OPENAI_API_KEY`.
-6. Lance `npm start`.
-7. Ouvre `http://localhost:3000`.
+Render : Build `npm install` / Start `npm start`.
 
-La clé API reste côté serveur et n'est pas incluse dans le code de l'application.
-
-## Mise en ligne pour l'iPhone
-
-Le serveur doit être déployé sur un hébergement Node avec HTTPS. Ensuite, ouvre son adresse HTTPS dans Safari et choisis « Ajouter à l'écran d'accueil ».
-
-## Important
-
-Le fichier `.env` ne doit jamais être envoyé sur GitHub ou inclus dans le ZIP public.
+L'« IA locale » n'est pas ChatGPT : elle interprète des phrases simples avec une base d'aliments embarquée. Les valeurs nutritionnelles sont des moyennes et des estimations.
