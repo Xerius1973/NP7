@@ -35,3 +35,6 @@ Ajout de nombreuses valeurs nutritionnelles officielles Quick France issues de l
 - Gestion de quantités (« 2 Big Mac »).
 - Priorité à la fiche restaurant explicitement mentionnée.
 - Fonction de test navigateur : `testNP7Restaurant("j'ai mangé un Big Mac chez McDo")`.
+
+## V14 — correction définitive de reconnaissance
+Correction du problème de portée JavaScript qui empêchait le moteur V13 de voir `RESTAURANTS_JSON`. Le Big Mac dispose en plus d'une reconnaissance directe de secours afin que « Big Mac », « j'ai mangé un Big Mac », « McDo Big Mac » et formulations similaires utilisent bien la fiche McDonald's au lieu de la valeur par défaut.
